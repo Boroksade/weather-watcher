@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Weather Watcher
+
+A responsive single-page weather dashboard built with Next.js and Tailwind CSS. Displays real-time weather conditions for 12 major cities worldwide using the free Open-Meteo API — no API key required.
+
+---
+
+## Features
+
+- **Live weather data** — temperature, feels like, humidity, wind speed, and weather condition for 12 cities
+- **Search** — filter cities by name or country code with a 300ms debounced input
+- **Sort** — order cities by hottest, coldest, most humid, or windiest
+- **Slice** — limit the view to top 4, top 8, or all cities
+- **Skeleton loading** — animated placeholder cards while data fetches
+- **Error handling** — user-friendly banner if the API request fails
+- **Fully responsive** — 1 to 4 column grid that adapts to any screen size
+
+---
+
+## Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| [Next.js 16](https://nextjs.org) | App Router, Server and Client Components |
+| [React 19](https://react.dev) | `useState`, `useEffect` hooks |
+| [Tailwind CSS v4](https://tailwindcss.com) | All styling |
+| [Open-Meteo API](https://open-meteo.com) | Free real-time weather data |
+
+---
+
+## Project Structure
+
+```
+weather-watcher/
+├── app/
+│   ├── layout.js           # Root layout — header, fonts, metadata
+│   ├── page.js             # Page entry point (Server Component)
+│   └── globals.css         # Global styles and body background
+├── components/
+│   ├── WeatherGrid.jsx     # Grid orchestration — filter, sort, slice state
+│   ├── WeatherCard.jsx     # Individual city weather card
+│   ├── WeatherSkeleton.jsx # Animated loading placeholder
+│   └── SearchBar.jsx       # Search, sort, and show-count controls
+└── hooks/
+    └── useWeatherData.js   # Custom hook — fetches all city weather data
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18 or higher
+- npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Boroksade/weather-watcher.git
+
+# Navigate into the project
+cd weather-watcher
+
+# Install dependencies
+npm install
+```
+
+### Running the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Building for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Cities Covered
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+New York · London · Tokyo · Paris · Dubai · Sydney · Lagos · Toronto · Berlin · São Paulo · Mumbai · Singapore
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Weather data is sourced from [Open-Meteo](https://open-meteo.com) — a free, open-source weather API with no authentication required.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fields used: `temperature_2m`, `apparent_temperature`, `relative_humidity_2m`, `wind_speed_10m`, `weather_code`
